@@ -1,0 +1,2 @@
+[27-Aug-2020 17:56:11 MET] PHP Warning:  session_start(): open(/var/cpanel/php/sessions/ea-php72/sess_m371boravc4gcn0o6ut95gedh8, O_RDWR) failed: No such file or directory (2) in /mnt/web217/e1/25/5966825/htdocs/test/xdit/projekt.php on line 2
+[27-Aug-2020 17:56:11 MET] PHP Warning:  session_start(): Failed to read session data: files (path: /var/cpanel/php/sessions/ea-php72) in /mnt/web217/e1/25/5966825/htdocs/test/xdit/projekt.php on line 2

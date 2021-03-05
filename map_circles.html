@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Circle Overlay</title>
+
+    <style type="text/css" MEDIA="screen, projection">
+	  #map {
+        width: 800px;
+        height: 600px;
+      }
+    </style>
+
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+	
+    <script type="text/javascript">
+		$(function() {
+		
+			// **** CREATE GOOGLE MAP ****
+			var mapCenter = new google.maps.LatLng(52, -2);
+			var map = new google.maps.Map(document.getElementById('map'), {
+				'zoom': 7,
+				'center': mapCenter,
+				'mapTypeId': google.maps.MapTypeId.ROADMAP
+			});
+
+			// **** LOAD XML FILE ****
+			$.ajax({
+                type: "GET",
+                url: "data.xml",								// This won't work on Chrome for local files
+                dataType: ($.browser.msie) ? "text" : "xml",	// IE turns xml data into plain text
+                success: function(data) {
+					var xml = toXmlDom(data);
+					
+					// Draw each project
+					$(xml).find('project').each(function(){
+						drawProjectOnMap(map, this);
+					});
+				},
+				error: function() {
+					handleError("Could not load XML file - local file access may be restricted (use IE).")
+				}
+			});
+		});
+		
+		function toXmlDom(data) {
+			if (typeof data != "string")
+				return data;
+
+			// Convert text to xml dom (IE hack)
+			var xml = new ActiveXObject("Microsoft.XMLDOM");
+			xml.async = false;
+			xml.loadXML(data);
+			return xml;
+		}
+		
+		function drawProjectOnMap(map, projectXml)
+		{
+			// Read xml elements
+			var postcode = $(projectXml).find('postcode').text();
+			var title = $(projectXml).find('title').text();
+			var company = $(projectXml).find('company').text();
+			var npeople = parseInt($(projectXml).find('consultants').text());
+			var completed = $(projectXml).find('completed').text();
+			
+			// **** LOOKUP POSTCODE ****
+			// UK postcode geocoding not supported by google maps due to licensing
+			$.ajax({
+				url: 'http://www.geopostcode.org.uk/api/exact/' + postcode.replace(' ','+') + '.json',
+				dataType: 'json',
+				success: function(response) {
+					if (response == null) {
+						handleError("Null response from geopostcode.co.uk - possible cross-domain AJAX security issue (use IE).");
+						return;
+					}
+					
+					// **** DRAW CIRCLE ****
+					// Create marker 
+					var marker = new google.maps.Marker({
+					  map: map,
+					  position: new google.maps.LatLng(response.wgs84.lat, response.wgs84.lon),
+					  title: company + ' - ' + title
+					});
+
+					// Add circle overlay and bind to marker (radius in metres)
+					var circle = new google.maps.Circle({
+					  map: map,
+					  radius: 6000 * npeople,
+					  fillColor: completed == true ? '#AA0000' : '#00AA00'
+					});
+					circle.bindTo('center', marker, 'position');
+				},
+				error: function() {
+					handleError("Postcode '" + postcode + "' not found, or service unavailable.")
+				}
+			});
+		}
+		
+		function handleError(message)
+		{
+			alert(message);
+		}
+    </script>
+  </head>
+  <body>
+    <h1>UK car industry</h1>
+    <div id="map"></div>
+  </body>
+</html>

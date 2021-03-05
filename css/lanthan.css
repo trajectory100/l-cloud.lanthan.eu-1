@@ -1,0 +1,22 @@
+   .btn-anactive {
+    background: #29a329;
+    color: #ffffff;
+   } 
+   
+   .btn-aninactive {
+    background: #c2f0c2;
+    color: #ffffff;
+    border: 1px solid #29a329;
+   }  
+   
+   .btn-diactive {
+    background: #0033cc;
+    color: #ffffff;
+   }   
+   
+   .btn-diinactive {
+    background: #b3c6ff;
+    color: #ffffff;
+    border: 1px solid #0033cc;
+   }
+   

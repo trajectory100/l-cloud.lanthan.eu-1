@@ -1,0 +1,14 @@
+<?php
+require_once('db.php');
+// how to run the code as an example  " http://test.lanthan.eu/API/Status.php?ID=359315076932408  "
+// how to run the code as an example  " http://test.lanthan.eu/API/modern.php?ID=359315076932408  "
+
+
+\header('Access-Control-Allow-Origin: *');
+\header('Content-Type: application/json; charset=utf-8');
+$pUser = $_GET['ID'] ?? null;
+
+if (\is_null($pUser) || $pUser === '') {
+    header('HTTP/1.0 403 Forbidden');
+    echo \json_encode(['e' => 'invalid ID given']);
+}

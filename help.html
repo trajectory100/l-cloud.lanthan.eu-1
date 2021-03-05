@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0035)http://status.lanthan.eu/indexx.php -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+  <link href="http://status.lanthan.eu/favicon.ico" rel="shortcut icon" type="image/x-icon">
+  <title>Lanthan  Cloud Monitoring</title>
+  
+  <meta http-equiv="Refresh" content="300">
+  <link href="css/status.css" rel="stylesheet" type="text/css">
+  <link href="css/status2.css" rel="stylesheet" type="text/css">
+
+  <!-- Google Fonts -->    
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,600,700,400' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Wire+One' rel='stylesheet' type='text/css'>
+  
+  <!-- CSS -->    
+  <link href="css/status.css" rel="stylesheet" type="text/css" />
+  <link href="css/status2.css" rel="stylesheet" type="text/css" />
+
+  <!-- jquery -->
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+  
+  <!-- Einausblenden -->
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $("dt").click(function(){ // trigger 
+        $(this).next("dd").slideToggle("fast"); // blendet beim Klick auf "dt" die nÃ¤chste "dd" ein. 
+        $(this).children("a").toggleClass("closed open"); // wechselt beim Klick auf "dt" die Klasse des enthaltenen a-Tags von "closed" zu "open". 
+      });
+    });
+  </script>
+  
+</head>
+<body>
+
+<div class="container">
+  <div class="contlogo">
+    <div class="contlogohead"> 
+      <img src="image/lanthan_110x60.jpg" width="110" height="60"> 
+    </div>
+    <div class="contlogotext"> 
+      Lanthan Cloud Monitoring
+    </div>
+  </div>
+
+  <div class="contnav">
+  <table width="797" border="0">
+    <tbody>
+      <tr>
+        <td width="189">
+          <a href="http://status.lanthan.eu/index.php">Home</a>
+        </td>
+        <td width="383">
+          Hilfe
+        </td>
+        <td width="211">
+          <div align="right">
+          <br>
+            -
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <br>
+  <div class="containertable">
+    <table cellspacing="3">
+      <thead>
+        <tr>
+          <th width="50px">Symbol</th>
+          <th width="40px">St-ID</th>
+          <th width="600px">Status</th>
+        </tr>
+      </thead>
+      
+      <tbody>
+        <tr valign="middle">
+          <td><img src="image/ampel_0.png"> </td>
+          <td>0</td>
+          <td>System OK<br><br></td>
+        </tr>
+        <tr valign="middle">
+          <td><img src="image/ampel_2.png"> </td>
+          <td>2</td>
+          <td>System Fehlerhaft<br><br></td>
+        </tr>
+        <tr valign="middle">
+          <td><img src="image/ampel_1.png"> </td>
+          <td>1</td>
+          <td>Meldungsausfall, keine Datenübertragung seit vereinbartem Zeitraum, <br>
+          letzter Zustand war System OK<br><br></td>
+        </tr>
+        <tr valign="middle">
+          <td><img src="image/ampel_3.png"> </td>
+          <td>3</td>
+          <td>Meldungsausfall, keine Datenübertragung seit vereinbartem Zeitraum, <br>
+          letzter Zustand war System Fehlerhaft<br><br></td>      
+        </tr>      
+        <tr valign="middle">
+          <td><img src="image/ampel_hellgrau.png"> </td>
+          <td>-</td>
+          <td>System deaktiviert<br><br></td>
+        </tr>
+
+      </tbody>
+    </table>
+
+
+    <dl>
+      <dt>
+      Die Status-ID kann über einen Link zu jedem Projekt jederzeit abgerufen werden. <br>
+      Der Link wird auf der Projektseite im Seitenkopf angegeben.<br>
+      Er folgt dem Schema: <br>
+      http://status.lanthan.eu/sub/status.php?JOB=ST1&PUSER=XXXXX<br>
+      wobei XXXXX der Projekt-ID entspricht.<br>
+      </dd>
+    </dl>
+   </div>
+  <br>
+
+  <div class="containerfoot">
+    status generated on: 16/03/31,11:16:37<br>
+    (c) 2016 
+    <a href="http://www.lanthan.eu/">Lanthan GmbH &amp; Co. KG </a>
+  </div>
+  
+</div>
+
+</body>
+</html>
